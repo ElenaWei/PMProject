@@ -26,7 +26,7 @@
 		<input type="submit" value="Add Product" />
 		
 	</form>
-	<h2>Product Creation/Edit</h2>
+	<h2>Product Creation</h2>
 		<form:form modelAttribute="product" method="post" enctype="multipart/form-data">
 			<form:hidden path="id" />
 			<div class="form-group">
