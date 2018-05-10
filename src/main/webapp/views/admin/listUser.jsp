@@ -14,20 +14,20 @@
 </c:if>
 <c:if test="${!empty requestScope.customers }">
 	<table border="1"><tr>
-			<th>Id</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Phone</th>
-			<th>Email</th>
-			<th>DOB</th>
-			<th>IdentificationNumber</th>
+			<th>id</th>
+			<th>fName</th>
+			<th>lName</th>
+			<th>phone</th>
+			<th>email</th>
+			<!-- <th>dob</th>
+			<th>identificationNumber</th> -->
 			<th>Street</th>
 			<th>City</th>
 			<th>State</th>
 			<th>Zip</th>
-			<th>Country</th>
-			<th>Username</th>
-			<th>Password</th>
+			<!-- <th>address.country</th> -->
+			<th>user.username</th>
+		<!-- 	<th>user.password</th> -->
 			<th>Role</th>
 			<th>Enabled</th>
 			
@@ -39,23 +39,23 @@
 			<td>${customer.lName} </td>			
 			<td>${customer.phone} </td>			
 			<td>${customer.email} </td>			
-			<td>${customer.dob} </td>			
-			<td>${customer.identificationNumber} </td>			
+			<%-- <td>${customer.dob} </td>			
+			<td>${customer.identificationNumber} </td> --%>			
 			<td>${customer.address.street} </td>			
 			<td>${customer.address.city} </td>			
 			<td>${customer.address.state} </td>			
 			<td>${customer.address.zip} </td>			
-			<td>${customer.address.country} </td>			
+		<%-- 	<td>${customer.address.country} </td>	 --%>		
 			<td>${customer.user.username} </td>			
-			<td>${customer.user.password} </td>			
+			<%-- <td>${customer.user.password} </td>	 --%>		
 			<td>${customer.user.hasRole} </td>			
 			<td>${customer.user.enabled} </td>			
-			<td><a href="/deleteUser/${customer.id }">Delete</a></td>			
-			<td><a href="/updateUserForAdmin/${customer.id }">Update</a></td>			
+			<td><a href="/deleteUser/${customer.id }">delete</a></td>			
+			<td><a href="/updateUserForAdmin/${customer.id }">update</a></td>			
 		</tr>
 		</c:forEach>
 	</table>
 </c:if>
-<a href="/admin">Go home</a>
+<a href="/admin">go home</a>
 </body>
 </html>

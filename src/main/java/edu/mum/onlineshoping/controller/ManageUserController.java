@@ -52,7 +52,7 @@ public class ManageUserController {
 	public String listUser(Model model) {
 		List<Customer> customers = UserService.findAll();
 		model.addAttribute("customers",customers);
-		System.out.println("/listUser");
+		//System.out.println("/listUser");
 		return "/admin/listUser";
 	}
 	@RequestMapping("/deleteUser/{id}")

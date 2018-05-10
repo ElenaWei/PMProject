@@ -25,31 +25,38 @@ public class UserServiceImpl implements UserService{
 		userRepository.save(customer);
 		return customer;
 	}
+
 	@Override
 	public List<Customer> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Customer>) userRepository.findAll();
 	}
+
 	@Override
-	public Customer findOne(Long id) {
+	public Customer findOne(Long cId) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findOne(cId);
 	}
+
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
+		userRepository.delete(id);
+	
 		
 	}
+
 	@Override
 	public void edit(Customer customer) {
 		// TODO Auto-generated method stub
+		userRepository.save(customer);
 		
 	}
+
 	@Override
 	public Customer findOneWithName(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findOneWithName(name);
 	}
 
-	
 }

@@ -21,20 +21,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Customer {
 	@javax.persistence.Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Long Id;
 	@NotEmpty
 	private String fName;
-	@NotEmpty
 	private String lName;
 	@NotEmpty
 	private String phone;
 	@Email
 	private String email;
-	@DateTimeFormat(pattern="MM/dd/yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Past
 	private Date dob;
+	@NotNull
+	private String identificationNumber="N/A";
 	@OneToOne(cascade=CascadeType.ALL)
 	@Valid
 	private Address address;
@@ -43,10 +44,10 @@ public class Customer {
 	private User user;
 	
 	public Long getId() {
-		return id;
+		return Id;
 	}
 	public void setId(Long id) {
-		this.id = id;
+		Id = id;
 	}
 	
 	public String getfName() {
@@ -79,12 +80,12 @@ public class Customer {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	/*public String getIdentificationNumber() {
+	public String getIdentificationNumber() {
 		return identificationNumber;
 	}
 	public void setIdentificationNumber(String identificationNumber) {
 		this.identificationNumber = identificationNumber;
-	}*/
+	}
 	public Address getAddress() {
 		return address;
 	}

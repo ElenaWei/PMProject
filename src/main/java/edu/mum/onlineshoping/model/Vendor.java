@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -31,16 +32,17 @@ public class Vendor {
 	@NotEmpty
 	private String lName;
 	@NotEmpty
+	@Pattern(regexp="\\d{10}", message="Not vaild phone number")
 	private String phone;
 	@Email(message = "Not vaild email")
 	private String email;
-	@DateTimeFormat(pattern="MM/dd/yyyy")
+	
+/*	@DateTimeFormat(pattern="MM/dd/yyyy")
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Past
 	private Date dob;
-//	@NotEmpty
-//	private String identificationNumber;
+*/
 	@OneToOne(cascade=CascadeType.ALL)
 	@Valid
 	private Address address;
@@ -48,13 +50,14 @@ public class Vendor {
 	@Valid
 	private User user;
 	@NotEmpty
+	@Pattern(regexp="^[0-9]{6,17}$", message = "Not vaild account number")
 	private String accountNumber;
-	@NotEmpty
+	
 	private double income;
 	
 	@OneToMany(mappedBy="vendor")
 	private List<Product> products;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -93,14 +96,6 @@ public class Vendor {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
 	}
 
 	public Address getAddress() {
@@ -143,5 +138,13 @@ public class Vendor {
 		this.products = products;
 	}
 	
-	
+	public void transferVendorForm(VendorForm vendorForm) {
+		this.address = vendorForm.getAddress();
+		this.fName = vendorForm.getfName();
+		this.lName = vendorForm.getlName();
+		this.phone = vendorForm.getPhone();
+		this.email = vendorForm.getEmail();
+		this.accountNumber = vendorForm.getAccountNumber();
+	}
+		
 }

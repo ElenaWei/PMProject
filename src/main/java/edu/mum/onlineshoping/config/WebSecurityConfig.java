@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,8 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 		.authorizeRequests()
+		.antMatchers("/vendor/**").access("hasRole('VENDOR')")
 		.antMatchers("/user/**").access("hasRole('USER')").antMatchers("/admin/**")
-				.access("hasRole('ADMIN')").antMatchers("/", "/home","/register","/index").permitAll().anyRequest().authenticated()
+				.access("hasRole('ADMIN')").antMatchers("/", "/home","/register/**","/index","/vendorRegister").permitAll().anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login")
@@ -49,4 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.authoritiesByUsernameQuery(
 				"select username, has_role from user where username=? ");
 	}
+	
+	@Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**");
+        web.ignoring().antMatchers("/fonts/**");
+        web.ignoring().antMatchers("/js/**");
+        web.ignoring().antMatchers("/images/**");
+    }
 }

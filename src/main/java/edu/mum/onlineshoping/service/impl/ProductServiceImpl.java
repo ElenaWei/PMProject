@@ -30,30 +30,11 @@ public class ProductServiceImpl implements ProductService{
 		return productRepository.findOne(key);
 	}
 
-	/*
-	@Override
-	public void delete(Long id) {
-		productRepository.delete(id);
-		
-	}
 
 	@Override
-	public void addProduct(Product product) {
-		productRepository.save(product);
-	}
-	*/
-
-	@Override
-	public List<Product> getAll() {
-		
+	public List<Product> getAll() {		
 		return (List<Product>) productRepository.findAll();
 	}
-
-
-	/*@Override
-	public void updateProduct(Long key) {
-		productRepository.updateProduct();
-	}*/
 
 	
 	public void sayHello(){
@@ -61,34 +42,53 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 
-	// write by Yaorui
+	// below is Writed by YaoruiWei
 	@Override
 	public List<Product> findByVendorId(Long vendorId) {
 		return productRepository.findByVendorId(vendorId);
 	}
-
 
 	@Override
 	public Product addProduct(Product product) {
 		return productRepository.save(product);
 	}
 
-
-	@Override
-	public List<Product> findByProductName(String productName) {
-		return productRepository.findByProductName(productName);
-	}
-
-
 	@Override
 	public void updateProduct(Product product) {
-		productRepository.save(product);
-		
+		productRepository.save(product);		
+	}
+
+	@Override
+	public void disableProduct(Long productId) {
+		productRepository.disable(productId);
+	}
+
+	@Override
+	public void enableProduct(Long productId) {		
+		productRepository.enable(productId);
+	}
+	
+	@Override
+	public List<Product> findByProductName(String name, Long vendorId) {
+		return productRepository.findByProductName(name, vendorId);
+	}
+	
+	@Override
+	public List<Product> findByProductName(String name) {
+		return productRepository.findByProductName(name);
+	}
+
+	@Override
+	public List<Product> findByVendorId_disable(Long vendorId) {
+		return productRepository.findByVendorId_disable(vendorId);
 	}
 
 
 	@Override
-	public void deleteProduct(Long ProductId) {
-		productRepository.delete(ProductId);
+	public List<Product> findByCategoryName(String name) {
+		return productRepository.findByCategoryName(name);
 	}
+
+	
+	
 }

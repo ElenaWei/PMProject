@@ -19,15 +19,11 @@ public class Category {
 	@javax.persistence.Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@NotEmpty()
-	private String cName;
+	@NotEmpty(message="category name can not be empty")
+	private String name;
 	@NotEmpty
-	private String description;
-	/*//@JsonIgnore 
-	@Transient
-	private MultipartFile  categoryImage;*/
-	
-	@OneToMany(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
+	private String description;	
+	@OneToMany(mappedBy="category", cascade = CascadeType.ALL)
 	private List<Product> product;
 	
 	public Long getid() {
@@ -36,11 +32,17 @@ public class Category {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getcName() {
-		return cName;
+	public String getName() {
+		return name;
 	}
-	public void setcName(String cName) {
-		this.cName = cName;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<Product> getProduct() {
+		return product;
+	}
+	public void setProduct(List<Product> product) {
+		this.product = product;
 	}
 	public String getDescription() {
 		return description;
@@ -48,11 +50,5 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	/*//@XmlTransient 
-	public MultipartFile getCategoryImage() {
-		return categoryImage;
-	}
-	public void setCategoryImage(MultipartFile categoryImage) {
-		this.categoryImage = categoryImage;
-	}*/
+
 }

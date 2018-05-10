@@ -9,13 +9,13 @@ import edu.mum.onlineshoping.model.ShoppingCart;
 
 public interface ShoppingCartService {
 	public ShoppingCart getById(Long Id);
-	public List<ShoppingCart> getAll();
+	public List<ShoppingCart> getAllByCustomerId(long userId);
 	@PreAuthorize("hasAnyRole('ROLE_USER','ROLE_CUSTOMER')")
-	public void saveShoppingCart(Long productId);
+	public void saveShoppingCart(Long productId , long userId);
 	public void deletShoppingCart(ShoppingCart shoppingCart);
 	public ShoppingCart findByTotalPrice();
-	public ShoppingCart findByOrderId(Long id);
+	public ShoppingCart findByProductId(Long id);
 	
-	public void deletAllCart();
+//	public void deletAllCartByUserId(long userId);
 	public double findTotalCartCost(List<ShoppingCart> shoppingCarts);
 }

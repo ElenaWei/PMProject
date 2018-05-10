@@ -12,21 +12,30 @@ public interface ProductService {
 	//public void updateProduct(Long key);
 	public void sayHello();
 		
-	//write by Yaorui
-    // get all the products belong to the specified vendor
+	//below is writed by YaoruiWei
+    // get all the enabled products belong to the specified vendor
     public List<Product> findByVendorId(Long vendorId);
+    
+    // get all the disabled products belong to this vendor
+    public Object findByVendorId_disable(Long vendorId);
     
     // vendor add new product operation
     public Product addProduct(Product product);
     
     //vendor search product operation
-    public List<Product> findByProductName(String productName);
+    public List<Product> findByProductName(String name, Long vendorId);
+    
+    public List<Product> findByProductName(String name);
     
     // vendor update product operation
     public void updateProduct(Product product);
     
-    // vendor delete product operation
-    public void deleteProduct(Long ProductId);
-
-
+    // vendor delete product operation(not really delete, just disable the product)
+    public void disableProduct(Long productId);
+    
+    // vendor active product from the warehouse to the saling product list
+	public void enableProduct(Long productId);
+	
+	// get all the products belong to the specified category
+	public List<Product> findByCategoryName(String name);
 }

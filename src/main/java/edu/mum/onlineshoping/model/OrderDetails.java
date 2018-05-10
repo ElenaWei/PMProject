@@ -11,11 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.criterion.Order;
 @Entity
 public class OrderDetails {
 	@javax.persistence.Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Long Id;
 	
 	private int quantity;
 	private double unitCost;
@@ -24,22 +25,34 @@ public class OrderDetails {
 	 @OneToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} ) 
 	 @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private Product product;*/
-	@ManyToOne( )
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private ShoppingCart shoppingCart;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Orders orders;
+	@ManyToOne( cascade = CascadeType.ALL)
 	private Product product;
 	
-	public  Product getProduct() {
-		return product;
-	}
-	public void setProducts(Product product) {
-		this.product = product;
-	}
+//	@ManyToOne( )
+//	private Product product; 
+//	public  Product getProduct() {
+//		return product;
+//	}
+//	public void setProducts(Product product) {
+//		this.product = product;
+//	}
 	public Long getId() {
-		return id;
+		return Id;
 	}
 	public void setId(Long id) {
-		this.id = id;
+		Id = id;
 	}
 	
+	public Orders getOrders() {
+		return orders;
+	}
+	public void setOrders(Orders orders) {
+		this.orders = orders;
+	}
 	public int getQuantity() {
 		return quantity;
 	}
@@ -59,4 +72,22 @@ public class OrderDetails {
 		this.subTotal = subTotal;
 	}
 	
+	
+//	public ShoppingCart getShoppingCart() {
+//		return shoppingCart;
+//	}
+//	public void setShoppingCart(ShoppingCart shoppingCart) {
+//		this.shoppingCart = shoppingCart;
+//	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return quantity+", "+unitCost+", "+subTotal+", "+orders;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 }

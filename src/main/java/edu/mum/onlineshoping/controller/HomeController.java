@@ -2,6 +2,9 @@ package edu.mum.onlineshoping.controller;
 
 
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import edu.mum.onlineshoping.model.Product;
+import edu.mum.onlineshoping.service.ProductService;
+import edu.mum.onlineshoping.service.UserService;
 
 
 
@@ -21,6 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController  {
 	@Autowired
 	JmsTemplate jmsTemplate;
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	ProductService productService;
 
 	@GetMapping({ "/", "/home" })
 	public String homePage() {
@@ -38,7 +52,10 @@ public class HomeController  {
 	}
 
 	@RequestMapping("/user")
-	public String toUserPage(HttpSession httpSession) throws Exception {
+	public String toUserPage(HttpServletRequest httpSession) throws Exception {
+//	System.out.println(httpSession.getSession().getAttribute("customer"));
+//		userService.edit(customer);
+		
 		return "userPage";
 	}
 
@@ -70,5 +87,19 @@ public class HomeController  {
 	// personService.savePerson(person);
 	// return "redirect:/login";
 	// }
+	
+	@RequestMapping("/customer/listProduct")
+	public String showProductList(Model model) {
+		List<Product> products = productService.getAll();
+		model.addAttribute("products",products);
+		return "listProduct";
+	}
+	@RequestMapping("/customer/listProduct/search")
+	public String searchProductList(String pname, Model model) {
+		List<Product> products = productService.findByProductName(pname);
+		model.addAttribute("products",products);
+		model.addAttribute("pname", pname);
+		return "listProduct";
+	}
 
 }

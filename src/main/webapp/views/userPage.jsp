@@ -13,16 +13,22 @@
 		<h1>Current User :</h1>
 		<sec:authentication property="name" />
 	</div>
+	<br />
 	<a href="/profile"> My Profile </a>
 	<br />
 	<br />
 	<h2>Products</h2>
-	<a href="/viewProducts">View Products</a>
+	<a href="/customer/viewProducts">View Products</a>
 	
 	<br />
 	<br />
 	<h2>Shopping Cart</h2>
-	<a href="/cartList">My Shopping Cart</a>
+	<a href="/cunstomer/cartList">My Shopping Cart</a>
+	<br />
+	<br />
+	
+	<h2>Order List</h2>
+	<a href = "/cunstomer/orderList">Order List</a>
 	<br />
 	<br />
 	<br />

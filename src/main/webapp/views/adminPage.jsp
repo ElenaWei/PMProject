@@ -29,6 +29,9 @@
 	<a href="#">Manage Coment</a> -->
 	<br />
 	<br />
+	<a href="reports/admin/AdminReport?format=pdf">Report</a>
+	<br />
+	<br />	
 	<br />
 	<a href="/logout">Logout</a>
 

@@ -1,6 +1,7 @@
 package edu.mum.onlineshoping.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,19 +9,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Orders {
-	@Id
+	@javax.persistence.Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
+	
 	private Date orderDate;
 	private Date shipDate;
 	@ManyToOne(cascade= CascadeType.ALL)
 	private Customer customer;
-	@OneToOne(cascade= CascadeType.ALL)
-	private ShippingInfo info;
+//	@OneToOne(cascade= CascadeType.ALL)
+//	private ShippingInfo info;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<OrderDetails> orderDetails ; 
+	private double totalPrice; 
 	
 	public Long getId() {
 		return id;
@@ -39,6 +45,24 @@ public class Orders {
 	}
 	public void setShipDate(Date shipDate) {
 		this.shipDate = shipDate;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+    
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return customer+" "+getId()+getOrderDate()+getShipDate();
 	}
 	
 }
